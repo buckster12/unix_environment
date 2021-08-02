@@ -1,0 +1,6 @@
+cat $1 |
+tr -sc A-Za-z '\012' |
+tr A-Z a-z |
+sort |
+uniq |
+comm -2 -3 - /usr/share/dict/words
