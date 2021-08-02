@@ -1,0 +1,3 @@
+# older f: show names of files, created before f
+ls -tr | sed '/^'$1'$/q' | sed -n '/'$1'/!p'
+

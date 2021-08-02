@@ -1,0 +1,3 @@
+# newer f: show files names, created after f
+ls -t | sed '/^'$1'$/q' | sed -n '/'$1'/!p'
+
