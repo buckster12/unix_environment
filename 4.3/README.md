@@ -1,6 +1,7 @@
 **to run app:**
 
 >  chmod +x check_spelling
+
 >  ./check_spelling comedy
 
 
