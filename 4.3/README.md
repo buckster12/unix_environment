@@ -8,5 +8,5 @@
 **The main problems are:**
 
 1) it does not advise right word
-2) it does not check 's 'ed and others
+2) it does not check *'s* *'ed* and others
 
