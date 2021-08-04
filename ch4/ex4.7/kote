@@ -1,5 +1,5 @@
 awk '{ print $0 }' $*
 awk //  $*
 awk 11  $*
-
+awk '{ printf "%s\n", $0 }' $*
 
