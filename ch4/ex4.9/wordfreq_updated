@@ -1,0 +1,11 @@
+# Todo: i think there is attribute of `tr` to improve removing special chars
+ 
+cat $* | 
+tr A-Z a-z | # replace capitals
+tr ",.-!:#%?^&*()+={}<>" " " | # remove special chars
+awk '	{ for (i=1; i<=NF; i++) if($i !~ /\./)  num[$i]++ }
+END	{ for (word in num) print word, num[word] }
+'
+
+
+
