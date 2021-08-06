@@ -1,21 +1,43 @@
 awk <tasks '
 BEGIN {
-	x = "Jan 31 Feb 28 Mar 31 Arp 30 May 31 Jun 30 " \
+	x = "Jan 31 Feb 28 Mar 31 Apr 30 May 31 Jun 30 " \
 		"Jul 31 Aug 31 Sep 30 Oct 31 Nov 30 Dec 31 Jan 31"
-	split(x,data)
+	split(x, data)
 	for(i = 1; i < 24; i +=2) {
 		days[data[i]] = data[i+1]
 		nextmon[data[i]] = data[i+2]
 	}
 	split("'"`date`"'", date)
+	# Testing
+	date[1]="Sat"
+	date[2]="Sep"
+	date[3]="1"
+
+	# Today
 	mon1 = date[2]; day1 = date[3]
+	# Tomorrow
 	mon2 = mon1; day2 = day1 + 1
+
+	# in case if today is the last day of the month
 	if(day1 >= days[mon1]) {
 		day2 = 1
 		mon2 = nextmon[mon1]
 	}
+	#Friday
+	if(date[1]=="Fri") {
+		day3 = day2 + 1; mon3 = mon2 # Sunday
+		day4 = day3 + 1; mon4 = mon3 # Monday
+		if(day2 >= days[mon2]) {
+			day3 = 1
+			mon3 = nextmon[mon2]
+		}
+		if(day3 >= days[mon3]) {
+			day4 = 1
+			mon4 = nextmon[mon3]
+		}
+	}
 }
-$1 == mon1 && $2 == day1 || $1 == mon2 && $2 == day2
+$1 == mon1 && $2 == day1 || $1 == mon2 && $2 == day2 || 
+	date[1]=="Fri" && $1 == mon3 && $2 == day3 || 
+	date[1]=="Fri" && $1 == mon4 && $2 == day4
 ' | mail chudilka
-
-
